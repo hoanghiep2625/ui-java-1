@@ -4,8 +4,10 @@ import Navbar from './components/Navbar'
 import BookDetail from './pages/BookDetail'
 import Books from './pages/Books'
 import Home from './pages/Home'
-import Kit from './pages/Kit'
+import Login from './pages/Login'
+import MyRentals from './pages/MyRentals'
 import NotFound from './pages/NotFound'
+import Register from './pages/Register'
 
 function Layout() {
   return (
@@ -27,7 +29,9 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/books" element={<Books />} />
           <Route path="/books/:id" element={<BookDetail />} />
-          <Route path="/kit" element={<Kit />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/my-rentals" element={<MyRentals />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
