@@ -13,7 +13,7 @@ export default function BookDetail() {
   return (
     <div className="flex flex-col gap-6">
       <Link to="/books" className="font-bold underline">← Quay lại kho sách</Link>
-      <div className="grid gap-8 md:grid-cols-[240px_1fr_300px]">
+      <div className="grid gap-8 md:grid-cols-[200px_1fr] lg:grid-cols-[240px_1fr_300px]">
         <BookCover book={book} className="w-48 shadow-brutal md:w-full" />
         <div className="flex min-w-0 flex-col gap-3">
           <Badge tone="white" className="self-start">{book.category}</Badge>
@@ -22,7 +22,7 @@ export default function BookDetail() {
           <p className="text-xl font-bold">{formatVnd(book.pricePerDay)}<span className="text-base font-medium">/ngày</span></p>
           <p className="break-words leading-relaxed">{book.description}</p>
         </div>
-        <RentPanel book={book} />
+        <div className="md:col-span-2 lg:col-span-1"><RentPanel book={book} /></div>
       </div>
     </div>
   )

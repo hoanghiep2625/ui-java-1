@@ -1,4 +1,5 @@
-import { BrowserRouter, Outlet, Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter, Outlet, Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import BookDetail from './pages/BookDetail'
@@ -8,6 +9,12 @@ import Login from './pages/Login'
 import MyRentals from './pages/MyRentals'
 import NotFound from './pages/NotFound'
 import Register from './pages/Register'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => window.scrollTo(0, 0), [pathname])
+  return null
+}
 
 function Layout() {
   return (
@@ -24,6 +31,7 @@ function Layout() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />

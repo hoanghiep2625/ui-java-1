@@ -16,7 +16,7 @@ export default function RentalItem({ rental, book }) {
           <StatusBadge status={rental.status} />
         </div>
         <p className="truncate text-sm text-ink/70">{book.author}</p>
-        <dl className="mt-auto grid grid-cols-3 gap-2 pt-2 text-sm">
+        <dl className="mt-auto grid grid-cols-2 gap-2 sm:grid-cols-3 pt-2 text-sm">
           <div><dt className="text-ink/60">Thời hạn</dt><dd className="font-bold">{rental.days} ngày</dd></div>
           <div><dt className="text-ink/60">Tổng tiền</dt><dd className="font-bold">{formatVnd(rental.total)}</dd></div>
           <div><dt className="text-ink/60">Hạn trả</dt><dd className="font-bold">{fmtDate(rental.dueDate)}</dd></div>
