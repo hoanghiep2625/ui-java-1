@@ -26,6 +26,14 @@ const raw = [
   ['Totto-chan bên cửa sổ', 'Tetsuko Kuroyanagi', 'Thiếu nhi', 3000, false],
 ]
 
+// ISBN (bản tiếng Anh) để lấy ảnh bìa từ Open Library; null = dùng bìa màu mặc định
+const isbns = [
+  null, '9780062315007', '9780671027032', '9780062316097', '9781612680194',
+  null, '9780553380163', '9780156012195', '9780374533557', '9780393317558',
+  '9780472030224', '9781585424337', '9780553802023', '9781400079278', '9780735211292',
+  null, '9781476733524', '9780451205766', '9780066620992', '9784770020475',
+]
+
 export const books = raw.map(([title, author, category, pricePerDay, featured], i) => ({
   id: String(i + 1),
   title,
@@ -34,7 +42,33 @@ export const books = raw.map(([title, author, category, pricePerDay, featured], 
   description: desc,
   pricePerDay,
   featured,
+  cover: isbns[i] ? `https://covers.openlibrary.org/b/isbn/${isbns[i]}-L.jpg?default=false` : null,
+  rating: Number((4 + ((i * 3) % 10) / 10).toFixed(1)),
+  rentCount: 12 + ((i * 37) % 90),
+  addedDaysAgo: (i * 7) % 60,
+  pages: 180 + ((i * 53) % 320),
+  publisher: ['NXB Trẻ', 'NXB Kim Đồng', 'NXB Tổng hợp', 'NXB Thế Giới', 'Alpha Books'][i % 5],
+  year: 2008 + ((i * 5) % 17),
+  condition: i % 4 === 0 ? 'Như mới' : 'Tốt',
 }))
+
+export const hotBooks = [...books].sort((a, b) => b.rentCount - a.rentCount)
+export const newBooks = [...books].sort((a, b) => a.addedDaysAgo - b.addedDaysAgo)
+
+export const priceRanges = [
+  { value: 'all', label: 'Tất cả mức giá', test: () => true },
+  { value: 'lt4', label: 'Dưới 4.000đ/ngày', test: (p) => p < 4000 },
+  { value: '4to5', label: '4.000đ – 5.000đ', test: (p) => p >= 4000 && p <= 5000 },
+  { value: 'gt5', label: 'Trên 5.000đ', test: (p) => p > 5000 },
+]
+
+export const sortOptions = [
+  { value: 'default', label: 'Mặc định' },
+  { value: 'hot', label: 'Thuê nhiều nhất' },
+  { value: 'new', label: 'Mới nhất' },
+  { value: 'price-asc', label: 'Giá tăng dần' },
+  { value: 'price-desc', label: 'Giá giảm dần' },
+]
 
 export const durations = [3, 7, 14]
 
